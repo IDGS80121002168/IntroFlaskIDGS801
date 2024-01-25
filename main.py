@@ -36,7 +36,21 @@ def suma(num1,num2):
     return "La suma de" + str(num1) + " " + str(num2) + " es igual a: " + str(total) 
 
 
+@app.route("/default")
+@app.route("/default/<string:d>")
+def func3(d="Cristian"):
+    return "El nombre del usuario es:  " + d
 
+@app.route("/operaBas")
+def operaBas():
+    return render_template("operaBas.html")
+
+@app.route("/resultado",methods=["GET","POST"])
+def resultado():
+    if request.method=="POST":
+        num1 = request.form.get("n1")
+        num2 = request.form.get("n2")
+        return "La multiplicacion de {} x {} = {}".format(num1,num2,str(int(num1) * int(num2)))
 
 if __name__ =="__main__":
     app.run(debug=True)
