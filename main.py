@@ -13,8 +13,15 @@ def index():
 def alumnos():
     alumno_clase= forms.UserForm(request.form)
     if request.method == 'POST':
-        pass 
-    return render_template("alumnos.html",form=alumno_clase)
+        nombre=alumno_clase.nombre.data
+        apaterno=alumno_clase.apaterno.data
+        amaterno=alumno_clase.amaterno.data
+
+        print('Nombre: {}', format(nombre))
+        print('apaterno: {}', format(apaterno))
+        print('amaterno: {}', format(amaterno))
+         
+    return render_template("alumnos.html",form=alumno_clase, nombre=nombre, apaterno=apaterno, amaterno=amaterno)
 
 @app.route("/maestros")
 def maestros():

@@ -1,6 +1,6 @@
 from wtforms import Form
-from flask_wtf import FlaskForm
 from wtforms import StringField,TelField,IntegerField
+from flask_wtf import FlaskForm
 from wtforms import EmailField
 from wtforms.validators import DataRequired, Email
 
