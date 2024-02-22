@@ -1,8 +1,24 @@
 from flask import Flask, render_template,request
+from flask import flash
+from flask_wtf.csrf import CSRFProtect
 import forms 
 
 app = Flask (__name__)
+app.secret_key = 'Esta es mi clave secreta'
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),404
+
+@app.before_request
+def before_request():
+    print("before 1")
+    
+
+@app.after_request
+def after_request(response):
+    print("after 1")
+    return response
 
 @app.route("/")
 def index():
@@ -11,6 +27,7 @@ def index():
 
 @app.route("/alumnos", methods= ['GET','POST'])
 def alumnos():
+    print("Alumno: {}".format(g.nombre))
     nombre=""
     apaterno=""
     amaterno=""
@@ -23,6 +40,9 @@ def alumnos():
         print('Nombre: {}', format(nombre))
         print('apaterno: {}', format(apaterno))
         print('amaterno: {}', format(amaterno))
+       
+        mensaje = 'Bienvenido {}'.format(nom)
+        flash(mensaje)
          
     return render_template("alumnos.html",form=alumno_clase, nombre=nombre, apaterno=apaterno, amaterno=amaterno)
 
